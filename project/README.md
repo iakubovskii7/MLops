@@ -1,6 +1,6 @@
 # MLOps
 
-This is train project to test optimal DS pipeline (CI/CD)
+This is the train project to test optimal DS pipeline (CI/CD)
 It will been used the following technology stack:
 - kedro-mlflow
 - DE in PostgreSQL
