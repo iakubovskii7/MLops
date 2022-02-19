@@ -1,0 +1,4 @@
+artifact_location: file:///Users/iakubovskii/DataScience/MLOps/project/mlruns/1
+experiment_id: '1'
+lifecycle_stage: active
+name: training
