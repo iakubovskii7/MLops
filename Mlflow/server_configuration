@@ -1,0 +1,31 @@
+Mlflow on the server side + AWS
+
+1. sudo apt install python3-pip; sudo pip3 install virtualenv; mkdir mlflow; cd mlflow; pipenv install mlflow
+2. pipenv install awscli; pipenv install boto3; pipenv install psycopg2-binary; pipenv shell; aws configure; <insert credentials>;
+Postgresql on the server side
+3. apt-get install postgresql postgresql-contrib postgresql-server-dev-all; sudo -u postgres psql
+4. CREATE DATABASE <postgres_database>; CREATE USER <postgres_user> WITH ENCRYPTED PASSWORD <postgres_password>; GRANT ALL PRIVILEGES ON DATABASE <postgres_database> TO <postgres_user>;
+5. sudo apt install gcc
+6. In the postgresql.conf listen_addresses = '*'; replace in pg_hba.conf host    all    all    10.10.10.187/32    trust on host    all    all    0.0.0.0    trust
+7. service postgresql restart
+Create app sudo systemctl
+8. sudo nano /etc/systemd/system/mlflow-tracking.service
+[Unit]
+Description=MLflow Tracking Server
+After=network.target
+[Service]
+Environment=MLFLOW_S3_ENDPOINT_URL=https://s3.amazonaws.com
+Restart=on-failure
+RestartSec=30
+StandardOutput=file:/home/remote/mlflow/mlflow_logs/stdout.log
+StandardError=file:/home/remote/mlflow/mlflow_errors/stderr.log
+User=remote
+ExecStart=/bin/bash -c 'PATH=/home/remote/.local/share/virtualenvs/mlflow-NY5FaGQL/bin/:$PATH exec \
+    mlflow server \
+    --backend-store-uri postgresql+psycopg2://<postgres_user>:<postgres_password>@localhost/<postgres_database> \
+    --default-artifact-root s3://<bucket_name>/artifacts/ \
+    --host 0.0.0.0 --port 5000'
+[Install]
+WantedBy=multi-user.target
+9. sudo systemctl daemon-reload; sudo systemctl enable mlflow-tracking; sudo systemctl start mlflow-tracking; sudo systemctl status mlflow-tracking
+10. set up in mlflow.yml mlflow_tracking_uri: <server_host>:5000
