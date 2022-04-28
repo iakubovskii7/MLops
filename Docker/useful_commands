@@ -1,0 +1,38 @@
+
+sudo apt-get install -y docker.io - установить докер на сервере
+
+docker build -t api . - создать докер-образ с названием api из докер файла в данной директории
+
+docker images - посмотреть все образы докера
+
+docker run api - запустить образ api
+
+docker run api python main.py - запустить отдельный скрипт внутри образа
+
+docker ps - посмотреть все запущенные контейнеры
+
+docker stop api - остановить контейнер api
+
+docker image rm $(docker image ls -f 'dangling=true' -q) - удалить все образы с тегом none
+
+docker run -p 80:80 api - ЗАПУСТИТЬ докер с API
+
+docker save -o <path for generated tar file> <image name> - сохранить докер в tar файл
+
+docker load -i docker.tar - загрузить образ из файла
+
+docker logs <container_id> > container.log 2>&1 - записать логи из докера в файл
+
+docker stop $(docker ps -a -q) Stop all running containers
+docker rm $(docker ps -a -q) Delete all stopped containers
+
+docker run -it --rm --port '8501:8501' - запустить докер и работать прям оттуда
+
+docker exec -it ml-platform-etl-services-streamlit-app-1 bash - запустить командную строку внутри докера "ml-platform-etl-services-streamlit-app-1"
+
+docker system prune -f - удалить все неиспользуемые контейнеры
+
+
+
+Мониторить контейнеры
+docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
