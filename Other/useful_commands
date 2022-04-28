@@ -1,0 +1,47 @@
+Чтобы создать пару ssh ключей, нужно:
+1. Сгенерировать ключ на компе, С КОТОРОГО будем подключаться на сервер
+ssh-keygen
+2. Скопировать на СЕРВЕР, КУДА будем подключаться
+ssh-copy-id -i ~/.ssh/mykey user@host
+3. В config описать параметры сервака и заходить через ssh host_name
+
+
+ngrok запуск ssh на тот, компьютер, куда мы хотим подключаться по ssh
+./ngrok tcp 22
+# Assuming your URL was tcp://0.tcp.jp.ngrok.io:11111
+ssh <YOUR_USERNAME>@0.tcp.jp.ngrok.io -p 11111
+
+
+Очистка кэша и оперативной памяти от лишних процессов:
+
+sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"
+
+Запустить streamlit с учетом окружения Python
+(чтобы можно было импортировать из файлов в других папках)
+python -m streamlit.cli run framework/app.py
+
+Установить python 3.8 рядом с python 3.9
+yay -S python38
+
+При установке иногда возникает ошибка, что какой-то ключ не проверен.
+Мы смотрим, что это за ключ и вводим такую команду в терминал
+gpg --keyserver keys.gnupg.net --recv-keys <ключ>
+
+
+Чтобы инициализировать частный гитхаб, нужно ввести следующее:
+eval "$(ssh-agent -s)"
+
+ssh-add ~/.ssh/id_rsa
+
+и затем уже ssh -T git@github.com
+
+Отключить спящий режим
+xset s 0 0
+xset dpms 0 0
+
+Активировать виртуальное окружение в Python
+source ../venv/bin/activate
+
+Экспортировать в пдф
+
+jupyter nbconvert --to webpdf --allow-chromium-download ASOONE_Reverse_Engineering.ipynb --TemplateExporter.exclude_input=True
