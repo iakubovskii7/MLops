@@ -1,0 +1,38 @@
+ps -aux | more - посмотреть процессы
+
+ps aux | grep -i streamlit - найти все процессы streamlit
+
+kill <номер pid> - уничтожить процесс
+
+
+Скопировать файлы из локальной машины на удаленную через ssh
+scp /path/to/file username@a:/path/to/destination
+
+Скопировать файлы из папки remote к себе на локалку:
+scp -r remote@65.108.144.212:/home/remote /home/igor/Appbooster/Remote
+
+Смонтировать директорию на локалке для файлов с remote:
+sshfs remote@65.108.144.212:/home/remote /home/igor/Appbooster/Remote
+
+Посмотреть, сколько free and available памяти
+cat /proc/meminfo
+
+Kill streamlit process (kill all processes in '')
+pkill -f 'streamlit'
+
+
+To clear PageCache only, use this command:
+sudo sysctl vm.drop_caches=1
+
+
+To clear dentries and inodes, use this command:
+sudo sysctl vm.drop_caches=2
+
+To clear PageCache, plus dentries and inodes, use this command:
+sudo sysctl vm.drop_caches=3
+
+Show screen sessions:
+screen -ls
+
+
+sudo du -sh /* 2> /dev/null - check how much each folder is spent for disk storage
