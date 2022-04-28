@@ -1,0 +1,13 @@
+https://github.com/kedro-org/kedro/issues/727
+
+@roumail Thank you for following up. Let me summarise the discussion here from a Kedro point of view:
+
+To go from kedro==0.17.0 to kedro==0.17.2, you will need to update the 00-kedro-init.py script to have this content.
+After that, kedro ipython and kedro jupyter notebook should work out of the box and populate a session and context variables for you by default. No extra work is required.
+You can still manually instantiate a session and context (option 2 discussed earlier). You will need to make sure that the working directory is the root project directory since you are instantiating a config loader manually.
+The session abstraction shouldn't create any problem with your containerized setup. For all practical intents and purposes, it is just another Python object as the context. On this note, could you explain your containerized setup a bit more please? I'm very curious.
+The one thing we added in 0.17.2 was requiring a configure_project(<package_name>) at the top of the workflow (invoking anything with the Kedro CLI will take care of this bit for you). This step will validate that the <package_name> is importable, i.e. the source directory is in the python path. It doesn't seem like this is the case in your environment. However, this should have been a problem in previous Kedro versions as well...
+
+I'm actually happy to jump into a zoom call to help you debug this :) We try our best to not break people's workflows with each update, so if there is anything I can learn from your setup, it will only help us going forward.
+
+
