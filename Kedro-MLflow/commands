@@ -1,0 +1,16 @@
+MAIN COMMANDS KEDRO-MLFLOW
+
+
+# Create pipeline
+create
+kedro run --pipeline dp --node create_model_input_table_node
+kedro run --pipeline dp -n create_model_input_table_node
+
+kedro run --pipeline dp --to-outputs preprocessed_shuttles
+kedro run --pipeline dp --from-inputs preprocessed_shuttles
+kedro run --pipeline dp --to-nodes create_model_input_table_node
+kedro run --pipeline dp --to-nodes create_model_input_table_node --to-nodes preprocess_shuttles_node
+
+# Notebooks context
+To go from kedro==0.17.0 to kedro==0.17.2, you will need to update the 00-kedro-init.py script to have this content - https://github.com/kedro-org/kedro/blob/0.17.2/kedro/templates/project/%7B%7B%20cookiecutter.repo_name%20%7D%7D/.ipython/profile_default/startup/00-kedro-init.py
+
