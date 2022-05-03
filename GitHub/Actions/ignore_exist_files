@@ -1,0 +1,23 @@
+If you added your .gitignore too late, git will continue to track already commited files regardless. To fix this, you can always remove all cached instances of the unwanted files.
+
+First, to check what files are you actually tracking, you can run:
+
+git ls-tree --name-only --full-tree -r HEAD
+
+Let say that you found unwanted files in a directory like cache/ so, it's safer to target that directory instead of all of your files.
+
+So instead of:
+
+git rm -r --cached .
+
+It's safer to target the unwanted file or directory:
+
+git rm -r --cached cache/
+
+Then proceed to add all changes,
+
+git add .
+
+and commit...
+
+git commit -m ".gitignore is now working"
