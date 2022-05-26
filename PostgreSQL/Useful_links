@@ -1,0 +1,5 @@
+https://towardsdatascience.com/5-most-common-sql-mistakes-you-should-avoid-dd4eb4088f0c - 5 advices
+
+1. Avoid Predicates in filtering
+2. Don’t Use Distinct
+3. Don’t Use ‘where’ for joining
