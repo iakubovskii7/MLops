@@ -5,5 +5,5 @@
         #include <openssl/aes.h>***
 
 ***Solution***
-env LDFLAGS="-L$(brew --prefix openssl)/lib" CFLAGS="-I$(brew --prefix openssl)/include" pip install scrypt
+env LDFLAGS="-L$(brew --prefix openssl)/lib" CFLAGS="-I$(brew --prefix openssl)/include" poetry install
 
