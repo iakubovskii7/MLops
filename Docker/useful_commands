@@ -30,6 +30,9 @@ docker run -it --rm --port '8501:8501' - запустить докер и раб
 
 docker exec -it ml-platform-etl-services-streamlit-app-1 bash - запустить командную строку внутри докера "ml-platform-etl-services-streamlit-app-1"
 
+docker run -it image_name sh - запустить командную строку внутри образа докера (не запуская контейнер)
+
+
 docker system prune -f - удалить все неиспользуемые контейнеры
 
 
